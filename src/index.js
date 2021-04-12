@@ -1,6 +1,7 @@
 const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
+const userRoutes = require('./routes/user');
 
 //Initiating express app
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 //setting up env variable
 env.config();
 
+//parsing json response
 app.use(express.json());
 
 //Connecting MongoDb database
@@ -18,17 +20,9 @@ mongoose.connect(
     console.log('Database Connected');
 })
 
-app.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "Hello from Server",
-  });
-});
+//Routes middleware
+app.use('/api',userRoutes);
 
-app.post("/data", (req, res, next) => {
-  res.status(200).json({
-    msg: req.body,
-  });
-});
 
 //listening to port
 app.listen(process.env.PORT, () => {

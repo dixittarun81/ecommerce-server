@@ -1,8 +1,11 @@
 const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
+
+
 const userRoutes = require('./routes/user');
 const adminRoutes = require("./routes/auth/admin");
+const categoryRoutes = require('./routes/category');
 
 //Initiating express app
 const app = express();
@@ -12,6 +15,7 @@ env.config();
 
 //parsing json response
 app.use(express.json());
+
 
 //Connecting MongoDb database
 mongoose.connect(
@@ -24,6 +28,7 @@ mongoose.connect(
 //Routes middleware
 app.use('/api',userRoutes);
 app.use('/api',adminRoutes);
+app.use('/api',categoryRoutes);
 
 
 //listening to port

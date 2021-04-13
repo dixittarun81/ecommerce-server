@@ -2,6 +2,7 @@ const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
 const userRoutes = require('./routes/user');
+const adminRoutes = require("./routes/auth/admin");
 
 //Initiating express app
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect(
 
 //Routes middleware
 app.use('/api',userRoutes);
+app.use('/api',adminRoutes);
 
 
 //listening to port

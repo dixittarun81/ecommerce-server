@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
-const {signup,signin} = require('../controller/user');
+const {signup,signin,requireSignIn} = require('../controller/user');
 
 //Express Router
 const router = express.Router();
@@ -10,6 +10,10 @@ router.post("/signup", signup);
 
 //sign in route
 router.post("/signin", signin);
+
+router.post("/profile", requireSignIn, (req,res) => {
+    res.status(200).json({user : 'profile'});
+});
 
 
 

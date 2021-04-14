@@ -1,6 +1,7 @@
 const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
+const path = require('path');
 
 
 const userRoutes = require('./routes/user');
@@ -31,6 +32,8 @@ app.use('/api',userRoutes);
 app.use('/api',adminRoutes);
 app.use('/api',categoryRoutes);
 app.use('/api',productRoutes);
+
+
 
 
 

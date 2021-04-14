@@ -1,15 +1,25 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const shortid = require('shortid');
+const path = require('path');
 
-//const { addCategory, getCategory } = require("../controller/category");
+
 const { adminMiddleware, requireSignIn } = require("../middlewares/auth");
-const Product = require('../models/product');
+const {createProduct} = require('../controller/product');
 
-router.post("/product/create", requireSignIn, adminMiddleware, (req,res) => {
-    
-    res.status(200).json({message: 'Hello'});
-    
-});
-//router.get("/category/getCategory", getCategory);
+const storage = multer.diskStorage({
+    destination: function(req,file,cb) {
+        cb(null, path.join(path.dirname(__dirname), 'uploads'))
+    },
+    filename: function (req, file, cb) {
+        cb(null, shortid.generate() + '-' + file.originalname);
+    }
+})
 
-module.exports = router;
+const upload = multer({storage});
+
+router.post("/product/create", requireSignIn, adminMiddleware, upload.array('productPicture'), createProduct );
+
+
+module.exports = router; 

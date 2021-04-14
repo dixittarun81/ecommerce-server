@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const userRoutes = require('./routes/user');
 const adminRoutes = require("./routes/auth/admin");
 const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 //Initiating express app
 const app = express();
@@ -29,6 +30,8 @@ mongoose.connect(
 app.use('/api',userRoutes);
 app.use('/api',adminRoutes);
 app.use('/api',categoryRoutes);
+app.use('/api',productRoutes);
+
 
 
 //listening to port

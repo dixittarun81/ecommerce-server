@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const shortid = require('shortid');
+const path = require('path');
 
 const { addCategory, getCategory } = require("../controller/category");
 const {

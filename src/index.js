@@ -8,6 +8,7 @@ const userRoutes = require('./routes/user');
 const adminRoutes = require("./routes/auth/admin");
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
 
 //Initiating express app
 const app = express();
@@ -32,7 +33,7 @@ app.use('/api',userRoutes);
 app.use('/api',adminRoutes);
 app.use('/api',categoryRoutes);
 app.use('/api',productRoutes);
-
+app.use('/api',cartRoutes);
 
 
 

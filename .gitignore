@@ -10,7 +10,6 @@
 /build
 
 # misc
-/src/uploads/
 .env
 .DS_Store
 .env.local

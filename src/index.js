@@ -18,6 +18,7 @@ env.config();
 
 //parsing json response
 app.use(express.json());
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 
 
 //Connecting MongoDb database

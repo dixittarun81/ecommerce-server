@@ -2,6 +2,7 @@ const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
 const path = require('path');
+const cors = require('cors');
 
 
 const userRoutes = require('./routes/user');
@@ -19,6 +20,7 @@ env.config();
 //parsing json response
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
+app.use(cors());
 
 
 //Connecting MongoDb database

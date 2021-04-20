@@ -16,6 +16,7 @@ function createCategories(categories, parentId = null) {
       _id: cate._id,
       name: cate.name,
       slug: cate.slug,
+      parentId: cate.parentId,
       children: createCategories(categories, cate._id),
     });
   }
@@ -29,7 +30,7 @@ exports.addCategory = (req, res) => {
     slug: slugify(req.body.name),
   };
 
-  console.log(req.file.filename);
+  
 
   if(req.file) {
     categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename;

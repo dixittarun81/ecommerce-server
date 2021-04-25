@@ -6,7 +6,7 @@ const path = require('path');
 
 
 const { adminMiddleware, requireSignIn } = require("../middlewares/auth");
-const {createProduct} = require('../controller/product');
+const {createProduct, getProductsBySlug} = require('../controller/product');
 
 const storage = multer.diskStorage({
     destination: function(req,file,cb) {
@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 router.post("/product/create", requireSignIn, adminMiddleware, upload.array('productPicture'), createProduct );
+router.get('/product/:slug', getProductsBySlug);
 
 
 module.exports = router; 

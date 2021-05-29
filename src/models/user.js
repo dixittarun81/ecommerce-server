@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
       min: 3,
       max: 20,
     },
-    userName: {
+    username: {
       type: String,
       required: true,
       trim: true,
@@ -38,33 +38,28 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["user", "admin", "super-admin"],
       default: "user",
     },
-    contactNumber: {
-      type: String,
-    },
-    profilePicture: {
-      type: String,
-    },
+    contactNumber: { type: String },
+    pofilePicture: { type: String },
   },
   { timestamps: true }
 );
 
-// userSchema.virtual("password").set(function (password) {
+// userSchema.virtual('password')
+// .set(function(password){
 //     this.hash_password = bcrypt.hashSync(password, 10);
 // });
 
-userSchema.virtual('fullName').get(function() {
-    return `${this.firstName} ${this.lastName}`
-})
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
 
 userSchema.methods = {
-    authenticate: async function(password) {
-        return await bcrypt.compare(password, this.password); 
-    }
-}
+  authenticate: async function (password) {
+    return await bcrypt.compare(password, this.hash_password);
+  },
+};
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
